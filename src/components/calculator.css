@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%;
+    width: 30%;
 }
 
 .row1, .row2, .row3, .row4, .row5 
@@ -11,7 +11,10 @@
     display: flex;
 }
 
-
+#equal
+{
+    background-color: #fc8b18;
+}
 
 .myButton
 {
@@ -23,9 +26,23 @@
 
 .result
 {
-    border: double;
+    border: dshed 4px;
+    background-color: #5c5c5c;
+    border-color: white;
     margin: 0;
-    width: 50%;
+    width: 30%;
+    height: 50px;
     border-radius: 2px;
     padding: 12px 28px;
+    text-align: left;
+    
+}
+
+.result p
+{
+    color: white;
+    position: fixed;
+    align-content: flex-end;
+    font-weight: bold;
+    
 }

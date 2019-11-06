@@ -1,78 +1,89 @@
-import React from 'react';
-import Result from './components/ResultComponent';
-import Keypad from './components/KeyPadComponent';
+import React, { Component } from 'react';
 import './App.css';
-// import { throwStatement } from '@babel/types';
+import Result from './components/ResultComponent';
+import KeyPad from "./components/KeyPadComponent";
 
-class App extends React.Component
-{
-  constructor()
-  {
-    super();
+//tutorial from https://github.com/niinpatel/calculator-react/blob/master/src/App.js
 
-    this.state ={
-      result: ""
+class App extends Component {
+    constructor(){
+        super();
+
+        this.state = {
+            result: ""
+        }
     }
-  }
 
-  onClick = button => {
-    if(button === "=")
-    {
-      this.calculate()
-    }
-    else if(button === "clear")
-    {
-      this.reset()
-    }
-    else if( button === "del")
-    {
-      this.setState({
-        result: this.state.result + button
-      })
-    }
-  }
+    onClick = button => {
 
- calculate = () => {
-   try {
-     this.setState({
-     result: (eval(this.state.result) || "") + ""
-   })
- }
- catch (e) {
-   this.setState({
-     result: "error"
-   })
- }
+        if(button === "="){
+            this.calculate()
+        }
 
-};
+        else if(button === "del"){
+            this.reset()
+        }
+        else if(button === "clear"){
+            this.backspace()
+        }
 
-  
-  reset = ()  =>
-  {
-    this.setState({
-      result: ""
-    })
-  }
+        else {
+            this.setState({
+                result: this.state.result + button
+            })
+        }
+    };
 
-  backspace = () =>
-  {
-    this.setState({
-      result: this.state.result.slice(0, -1)
-    })
+
+    calculate = () => {
+      var checkResult = ''
+      if(this.state.result.includes('--')){
+          checkResult = this.state.result.replace('--','+')
+      }
+
+      else {
+          checkResult = this.state.result
+      }
+
+      try {
+          this.setState({
+              // eslint-disable-next-line
+              result: (eval(checkResult) || "" ) + ""
+          })
+      } catch (e) {
+          this.setState({
+              result: "error"
+          })
+
+      }
   };
 
+    reset = () => {
+        this.setState({
+            result: ""
+        })
+    };
 
-  render()
-  {
-    return(
-      <div>
-        <div className="calculator">
-          <Result result={this.state.result}/>
-          <Keypad onClick={this.onClick}/>
-        </div>
-      </div>
-    );
-  }
+    backspace = () => {
+        this.setState({
+            result: this.state.result.slice(0, -1)
+        })
+    };
+
+    render() {
+        return (
+            <div>
+                <div className="calculator-body">
+                    <h1>Simple Calculator</h1>
+                    <Result result={this.state.result}/>
+                    <KeyPad onClick={this.onClick}/>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
+
+
+
