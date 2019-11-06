@@ -1,4 +1,31 @@
 .keypad
 {
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.row1, .row2, .row3, .row4, .row5 
+{
+    display: flex;
+}
+
+
+
+.myButton
+{
+    margin: 0;
+    width: 80%;
+    border-radius: 2px;
+    padding: 12px 28px;
+}
+
+.result
+{
+    border: double;
+    margin: 0;
+    width: 50%;
+    border-radius: 2px;
+    padding: 12px 28px;
 }
