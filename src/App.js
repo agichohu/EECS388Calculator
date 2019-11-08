@@ -2,32 +2,41 @@ import React, { Component } from 'react';
 import './App.css';
 import Result from './components/ResultComponent';
 import KeyPad from "./components/KeyPadComponent";
+import { delay } from 'q';
 
 //tutorial from https://github.com/niinpatel/calculator-react/blob/master/src/App.js
 
-class App extends Component {
-    constructor(){
+class App extends Component 
+{
+    constructor()
+    {
         super();
 
-        this.state = {
+        this.state = 
+        {
             result: ""
         }
     }
 
-    onClick = button => {
+    onClick = button => 
+    {
 
-        if(button === "="){
+        if(button === "=")
+        {
             this.calculate()
         }
 
-        else if(button === "del"){
+        else if(button === "clear")
+        {
             this.reset()
         }
-        else if(button === "clear"){
+        else if(button === "del")
+        {
             this.backspace()
         }
 
-        else {
+        else 
+        {
             this.setState({
                 result: this.state.result + button
             })
@@ -35,28 +44,31 @@ class App extends Component {
     };
 
 
-    calculate = () => {
-      var checkResult = ''
-      if(this.state.result.includes('--')){
-          checkResult = this.state.result.replace('--','+')
-      }
+    calculate = async () => 
+    {
+      var checkResult = this.state.result
 
-      else {
-          checkResult = this.state.result
-      }
-
-      try {
+      try 
+      {
           this.setState({
               // eslint-disable-next-line
-              result: (eval(checkResult) || "" ) + ""
+              result: eval(checkResult)
           })
-      } catch (e) {
+      } catch (e) 
+      {
           this.setState({
-              result: "error"
+              result: "does not compute"
           })
 
       }
+
+      await delay(3000);
+
+      this.reset();
+
   };
+
+
 
     reset = () => {
         this.setState({
@@ -73,8 +85,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <div className="calculator-body">
-                    <h1>Simple Calculator</h1>
+                <div className="calculator">
                     <Result result={this.state.result}/>
                     <KeyPad onClick={this.onClick}/>
                 </div>

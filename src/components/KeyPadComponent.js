@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import './calculator.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 // import 'bootstrap/dis/css/bootstrap.min.css'
 
 class Keypad extends Component
